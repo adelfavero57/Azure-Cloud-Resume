@@ -1,0 +1,39 @@
+{
+  "scriptFile": "__init__.py",
+  "bindings": [
+    {
+      "authLevel": "anonymous",
+      "type": "httpTrigger",
+      "direction": "in",
+      "name": "req",
+      "methods": [
+        "get",
+        "post"
+      ]
+    },
+    {
+      "type": "cosmosDB",
+      "direction": "out",
+      "name": "doc",
+      "databaseName": "db1",
+      "collectionName": "container1",
+      "createIfNotExists": "true",
+      "connectionStringSetting": "CosmosDBConnectionString"
+    },
+    {
+      "type": "cosmosDB",
+      "direction": "in",
+      "name": "docIn",
+      "databaseName": "db1",
+      "collectionName": "container1",
+      "createIfNotExists": "true",
+      "connectionStringSetting": "CosmosDBConnectionString",
+      "sqlQuery": "SELECT * from c"
+    },
+    {
+      "type": "http",
+      "direction": "out",
+      "name": "$return"
+    }
+  ]
+}
