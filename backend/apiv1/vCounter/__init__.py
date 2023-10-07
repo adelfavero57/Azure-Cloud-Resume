@@ -1,5 +1,5 @@
 import logging
-
+import json
 import azure.functions as func
 
 def main(req: func.HttpRequest, docIn: func.DocumentList, doc: func.Out[func.Document]) -> func.HttpResponse:
@@ -19,6 +19,14 @@ def main(req: func.HttpRequest, docIn: func.DocumentList, doc: func.Out[func.Doc
 
     for value1 in docIn:
         if value1["id"] == "1":
-            counter = value1["counter"]
+            outputValue = value1["counter"]
+    print()
+    outputDict = {
+        "id": "1",
+        "counter": outputValue
+    }
 
-    return func.HttpResponse(f"Hello, you are visitor number {counter}. This HTTP triggered function executed successfully.")
+    return func.HttpResponse(
+            json.dumps(outputDict),
+            mimetype="application/json",
+        )
